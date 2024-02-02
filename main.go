@@ -5,6 +5,8 @@ import (
 	email "send-email-via-gmail/controller"
 	"send-email-via-gmail/util"
 	"strings"
+
+	"github.com/robfig/cron"
 )
 
 func main() {
@@ -27,8 +29,21 @@ func main() {
 			"🔽 Cc: " + strings.Join(Config.Email.Cc, ","),
 			"📄 Subject: " + Config.Email.Subject,
 		}, "\n"),
+		"Worker",
+		strings.Join([]string{
+			"⌛️ crontab expression : " + Config.Worker.CronTab,
+		}, "\n"),
 	)
 
-	email.NewSendEmail(Config, "./export/test-file.txt")
+	c := cron.New()
+
+	logger.Info("Run Job ⏳", "Crontab", Config.Worker.CronTab)
+
+	c.AddFunc(Config.Worker.CronTab, func() {
+		email.NewSendEmail(Config, "./export/test-file.txt")
+	})
+
+	c.Start()
+	select {} // Wait for the cron job to run (the program can be run continuously)
 
 }

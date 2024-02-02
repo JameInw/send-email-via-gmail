@@ -60,6 +60,10 @@ func GetEnvironmentYAML() (models.Config, error) {
 			"🔽 Cc: " + strings.Join(Config.Email.Cc, ","),
 			"📄 Subject: " + Config.Email.Subject,
 		}, "\n"),
+		"Worker",
+		strings.Join([]string{
+			"⌛️ crontab : " + Config.Worker.CronTab,
+		}, "\n"),
 	)
 
 	return Config, nil
