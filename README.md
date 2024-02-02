@@ -1,6 +1,8 @@
 # send-email-vid-gmail
 Sending Email And Attachment With GO (Golang) Using SMTP, Gmail
 
+New Function : CronTab
+
 ## Setting Gmail and Account
 First setup your gmail account like this. You can access here from settings/all settings,
 Open Forwarding and POP/IMAP. Enable IMAP and save changes.
@@ -36,7 +38,7 @@ Create `configuration.yaml`
 ```yaml
 email:
   from: "cGhhbnVwaG9uZy5wQGJlcnlsOC5jb20="
-  password: "c2VzZ2lxeHpyb2t0cmZsaA=="
+  password: "bm5zbWx1Y2hibHNlcWV0bA=="
   smtphost: "smtp.gmail.com"
   smtpport: "587"
   to: 
@@ -45,8 +47,10 @@ email:
   cc:
    - "dGhlamFtZXphczEyQGdtYWlsLmNvbQ=="
    - "dGhlamFtZXphc0Bob3RtYWlsLmNvbQ=="
-   - "ZHVhbmdydXRoYWkwNEBnbWFpbC5jb20="
   subject: "Test Send Email via Gmail {DD-MM-YYYY}"
+
+worker:
+  crontab: "*/10 * * * * *"
 ```
 
 ## Code Review
