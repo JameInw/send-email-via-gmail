@@ -10,6 +10,11 @@ type Email struct {
 	Subject  string   `yaml:"subject"`
 }
 
+type Worker struct {
+	CronTab string `yaml:"crontab"`
+}
+
 type Config struct {
-	Email Email `yaml:"email"`
+	Email  Email  `yaml:"email"`
+	Worker Worker `yaml:"worker"`
 }
